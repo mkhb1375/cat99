@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cats99</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <style>
+
+input,select,textarea,button,body{
+  
+
+    
+    text-shadow: #000 0 0 30px;
+    color:white;
+    background:gray;
+    font-size:30px;
+}
+
+
+
+  </style>
+  <header>
+<br>
+<br>
+
+<form action="<%= new_user_url %>">
+    <input type="submit" value="Signup" />
+</form>
+
+<h3>
+
+
+<% if flash[:notice]%>
+<%= flash[:notice] %>
+<% end %>
+
+
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+   <%= error %><br />
+  <% end %>
+<% end %>
+
+
+</h3>
+<% if request.original_url != new_session_url%>
+
+
+    <% if current_user == nil %>
+    <% action = new_session_url%>
+    <% method = "get" %>
+    <% buttom = "login"%>
+    <% temp="" %>
+    <% else%>
+    <% action = session_url%>
+    <% method = "delete"%>
+    <% buttom = "logout"%>
+    <% temp= current_user.user_name %>
+    <% end%>
+
+
+    <form action= "<%= action %>" method="post">
+    <input type="hidden" name="_method" value="<%= method %>">
+    <%= p temp %>
+  <input type="submit" value="<%= buttom %>">
+
+ 
+
+      
+
+ 
+  
+<% end %>
+
+
+ <input
+          type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+
+  
+</form>
+<br>
+<a href=" /cats" >Home </a>
+   </header>
+    <%= yield %>
+  </body>
+</html>

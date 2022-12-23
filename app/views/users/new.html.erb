@@ -1,0 +1,76 @@
+<style>
+body{
+    
+  
+      text-align: center;
+      color:#FF5D05;
+
+    
+    text-shadow: #000 0 0 30px;
+   
+   background-image: url("<%= asset_path('kity.jpg') %>");
+
+  
+}
+
+    form{
+       /* color:white; */
+        text-align:center;
+        font-size:40px;
+        font-weight:700;
+    }
+    label,a{
+        color:inherit;
+       background-color:rgba(20,40,40,0.5);
+
+    font-size:40px;
+    }
+
+    h1{
+    
+    display: block;
+      
+
+    font-family: 'c059';
+    font-weight:700;
+    font-style: italic;
+    font-size:50px;
+    padding:50px;
+   
+}
+
+input,select,textarea,button{
+    color:white;
+    background:gray;
+    font-size:30px;
+}
+
+</style>
+<br><br>
+
+
+<form action= "<%= users_url %>" method="post">
+
+
+
+    <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+<label for="user_name">Username</label>
+
+<input type="text" name="[user]user_name" id="user_name">
+<br><br>
+<label for="password">Password</label>
+
+<input type="password" name="[user]password" id="password">
+<br><br>
+
+<label for="second_password">Confirm Password</label>
+
+<input type="password" name="[user]second_password" id="second_password">
+<br><br>
+
+    <button type="submit">CreateUser!</button>
+</form>

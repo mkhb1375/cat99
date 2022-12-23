@@ -1,0 +1,109 @@
+ <style>
+   body{
+    
+  
+      text-align: center;
+      color:#FF5D05;
+
+    
+    text-shadow: #000 0 0 30px;
+   
+   background-image: url("<%= asset_path('kity.jpg') %>");
+
+  
+}
+   form{
+       /* color:white; */
+        text-align:center;
+        font-size:30px;
+        font-weight:700;
+    }
+
+    h1{
+    text-align:center;
+    display: block;
+      
+
+    font-family: 'c059';
+    font-weight:700;
+    font-style: italic;
+    font-size:50px;
+    padding:50px;
+   
+}
+ h2{
+    
+    text-align:center;
+    display: block;
+      
+
+    font-family: 'c059';
+    
+   
+    font-size:40px;
+    padding:50px;
+   
+}
+label,a{
+    color:inherit;
+       background-color:rgba(20,40,40,0.5);
+
+    font-size:40px;
+}
+
+input,select,textarea,button{
+    
+    font-size:30px;
+}
+ </style>
+<br>
+<br>
+<h1>Cat Rental Request</h1>
+<br>
+<h2><%=@pending_error %></h2>
+
+
+<br>
+
+<form action="/cats/<%= @cat_id %>/cat_rental_requests" method="post">
+<input
+          type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+<label for="cat-select">Select a cat</label>
+
+<select name="[cat_rental_request]cat_id" id="cat-select" >
+    
+    <% @cats.each do|yy|%>
+
+   
+  
+    <%= temp = "selected" if yy.id == @cat_id.to_i %>
+   
+
+
+    <option value="<%=yy.id%>" <%=temp%> > <%=yy.name%> </option>
+    <% end%>
+
+</select>
+
+
+
+<br>
+<br>
+<label for="start_date">Start Date</label>
+<input type="date" name="[cat_rental_request]start_date" id="start_date" value="<%= Date.today %>">
+
+
+
+<br>
+<br>
+<label for="end_date">End_Date</label>
+<input type="date" name="[cat_rental_request]end_date" id="end_date" value="<%= Date.today %>">
+
+<br><br>
+
+<button type="submit">Submit Request</button>
+</form>
+<br>
+<h2><a href=" /cats" >Home </a></h2>

@@ -1,0 +1,153 @@
+<style>
+ td , tr{
+    border: 2px solid black;
+    background : gray;
+    color: white;
+    padding:5px;
+ 
+   
+    
+    
+ }
+ td{
+       margin:50px;
+ }
+ 
+ h1{
+    color:#FF5D05;
+    text-align:center;
+    font-family: 'c059';
+    font-weight:700;
+    font-style: italic;
+    font-size:70px;
+ 
+ }
+ 
+ table{
+    margin:0 auto;
+    font-size:30px;
+    border-collapse:disable;
+    border-spacing:5px;
+    
+ }
+ 
+ body{
+   text-align: center;
+      
+
+    
+    text-shadow: #000 0 0 30px;
+   
+   background-image: url("<%= asset_path('kity.jpg') %>");
+   margin-top:50px;
+    /* background: #959595; */
+ }
+ a{
+    
+    font-size:40px;
+    color:#FF5D05;
+     text-decoration:none;
+     
+     
+
+}
+h2{
+       color:#FF5D05;
+    text-align:center;
+   color:#000;
+    font-size:50px;
+ 
+}
+
+h3{
+        background-color:rgba(20,40,40,0.5);
+
+       color:white;
+    text-align:center;
+  font-weight:700;
+    font-size:35px;
+ 
+}
+
+a{
+         background-color:rgba(20,40,40,0.5);
+
+   margin-right:20px;
+   margin-left:20px;
+}
+ </style>
+
+
+<br><br>
+
+
+<h1><%= @cat.name %> :</h1>
+<br><h3> Pending Requests : </h3>
+<% i =0%>
+<h3><% @temp_dates.each do |ele| %>
+Start Date :
+<%= ele[0]  %>
+___
+End Date :
+<%= ele[1]  %>
+
+
+<% if owner? != 0 %>
+___
+Requester :
+<%=@requester%>
+<%= link_to "Approve", approve_request_pages_path(:id=>@temp_id[i]), class: "button" %> <%= link_to "Deny", deny_request_pages_path(:id=>@temp_id[i]), class: "button" %>
+<% end%>
+
+<br>
+<% i= i+1%>
+<% end%>
+
+</h3>
+<table>
+<tr>
+<td> Age </td>   <td> <%= @cat.age %> </td>
+</tr>
+    <tr>
+   <td> Birth Day : </td> <td> <%= @cat.birth_date %> </td>
+   
+</tr>
+<tr>
+
+
+   <td>Color : </td>  <td> <%= @cat.color %> </td>
+</tr>
+<tr>
+   <td> Sex : </td> <td> <%= @cat.sex %> </td>
+</tr>
+<tr>
+   <td> Description: </td> <td> <%= @cat.description %> </td>
+</tr>
+   
+</table>
+<br>
+<h3><%= @cat.name %>`s Plans: </h3>
+
+<% @requests.each do |ele|%>
+
+
+
+<h3>
+
+
+<%= ele %>   
+
+
+
+</h3>
+
+<% end%>
+<br>
+<% if owner? != 0 %>
+<h2><a href=" /cats/<%= @cat.id %>/edit" >Edit <%=@cat.name%>  </a></h2>
+<% end%>
+<a  href="/cats/<%= @cat.id %>/cat_rental_requests/new" >Request a cat  </a>
+
+<br>
+<br>
+

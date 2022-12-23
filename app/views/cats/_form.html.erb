@@ -1,0 +1,120 @@
+<% action = (cat.persisted? ? cat_url(cat) : cats_url )  %>
+<% method= (cat.persisted? ? :patch : :post) %>
+<% title= (cat.persisted? ? :Edit : :Add) %>
+
+<style>
+body{
+    
+  
+      text-align: center;
+      color:#FF5D05;
+
+    
+    text-shadow: #000 0 0 30px;
+   
+   background-image: url("<%= asset_path('kity.jpg') %>");
+
+  
+}
+    form{
+       /* color:white; */
+        text-align:center;
+        font-size:40px;
+        font-weight:700;
+    }
+    label,a{
+        color:inherit;
+       background-color:rgba(20,40,40,0.5);
+
+    font-size:40px;
+    }
+
+    h1{
+    
+    display: block;
+      
+
+    font-family: 'c059';
+    font-weight:700;
+    font-style: italic;
+    font-size:50px;
+    padding:50px;
+   
+}
+
+input,select,textarea{
+    color:white;
+    background:gray;
+    font-size:30px;
+}
+
+
+</style>
+
+
+<form action= "<%= action %>" method="post">
+<input type="hidden" name="_method" value="<%= method %>">
+<input
+          type="hidden"
+          name="authenticity_token"
+          value="<%= form_authenticity_token %>">
+<br>
+<% gg = (cat.persisted? ? cat.name : "" ) %>
+<h1> <%= title %> <%=gg%></h1> 
+
+<label for="name">Name</label>
+<input type="text" name="[cats]name" id="name" value="<%= cat.name %>">
+<br><br>
+
+<label for="sexM">Sex</label>
+<label for="sexM">M</label>
+<% if cat.sex == "M" %>
+<% a="checked" %>
+<% else %>
+<%  b="checked" %>
+<% end %>
+<input type="radio" name="[cats]sex" id="sexM" value="M" <%= a %> >
+<label for="sexF">F</label>
+<input type="radio" name="[cats]sex" id="sexF" value="F" <%= b %> >
+
+
+<br><br>
+<label for="Color">Choose a Color:</label>
+
+<select name="[cats]color" id="Color">
+
+  
+ <% Cat::CAT_COLORS.each do |color| %>
+<% a= "selected" if cat.color == color %>
+<% a= "" if cat.color != color %>
+
+ <option value="<%= color %>" <%=a%> ><%=color%></option>
+ 
+ 
+
+
+ <% end %>
+</select>
+
+
+<br><br>
+<label for="date">Birth Date:</label>
+<input type="date" name="[cats]birth_date" id="date" value="<%= cat.birth_date %>">
+
+<br><br>
+
+<label for="des">Description</label>
+<textarea name="[cats]description" id="des" cols="30" rows="10">
+<%= cat.description %>
+</textarea>
+
+<br><br>
+<% tt = (cat.persisted? ? "Update" : "Add")%>
+<!-- <label for="uu">Submit!</label> -->
+<input type="submit" value="<%= tt %>">
+
+<br>
+<br>
+
+</form>
+
